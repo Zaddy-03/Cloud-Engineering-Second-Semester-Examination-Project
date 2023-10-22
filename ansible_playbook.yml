@@ -1,0 +1,20 @@
+---
+- name: Deploy LAMP Stack and Laravel App
+  hosts: slave
+  become: yes
+  tasks:
+    - name: Copy deploy.sh to slave node
+      copy:
+        src: deploy.sh
+        dest: /tmp/deploy.sh
+        mode: 0755
+
+    - name: Execute deploy.sh
+      shell: /tmp/deploy.sh
+
+    - name: Schedule cron job for server uptime check
+      cron:
+        name: "Check Server Uptime"
+        minute: 0
+        hour: 0
+        job: "uptime >> /var/log/uptime.log"
