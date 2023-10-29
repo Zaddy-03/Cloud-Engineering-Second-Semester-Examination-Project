@@ -1,3 +1,11 @@
+#!/bin/bash
+
+
+# create a vagrant file
+touch Vagrantfile
+
+# edit the vagrant file
+cat <<EOF > Vagrantfile
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -31,3 +39,7 @@ Vagrant.configure("2") do |config|
     end
   end  
 end
+EOF
+
+# start vagrant
+vagrant up
